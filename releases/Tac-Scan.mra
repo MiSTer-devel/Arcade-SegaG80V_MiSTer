@@ -4,6 +4,7 @@
     <setname>tacscan</setname>
 	<rbf>SegaG80V</rbf>
     <mameversion>0283</mameversion>
+    <rotation>vertical (ccw)</rotation>
     <year>1982</year>
     <manufacturer>Sega</manufacturer>
     <category>Shooter</category>

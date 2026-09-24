@@ -4,6 +4,7 @@
     <setname>elim2</setname>
 	<rbf>SegaG80V</rbf>
     <mameversion>0283</mameversion>
+    <rotation>horizontal</rotation>
     <year>1981</year>
     <manufacturer>Gremlin</manufacturer>
     <category>Shooter</category>

@@ -1,9 +1,20 @@
-# Eliminator, Star Trek, Tac/Scan, and Zektor for MiSTer FPGA
+# Space Fury, Eliminator, Star Trek, Tac/Scan, and Zektor for MiSTer FPGA
 
 An FPGA implementation of Sega's G80 color-vector arcade hardware for the
 [MiSTer FPGA](https://github.com/MiSTer-devel/Main_MiSTer/wiki) platform. The
-current release includes **Eliminator**, **Star Trek: Strategic Operations
-Simulator**, **Tac/Scan**, and **Zektor**.
+current release includes **Space Fury**, **Eliminator**, **Star Trek: Strategic
+Operations Simulator**, **Tac/Scan**, and **Zektor**.
+
+Space Fury brought vivid color and a memorable adversary to the Asteroids
+formula. Released by Sega/Gremlin in 1981, this pioneer of
+[color vector graphics](https://elibrary.arcade-museum.com/classic/Play-Meter/1981-September-15/62)
+pits your lone fighter against the fleet of a taunting, one-eyed alien
+commander. Rotate, thrust and fire through his forces, then dock with a
+mothership to increase your firepower. The commander challenges you before
+battle and judges your performance afterward, giving every encounter a
+personal edge. *Video Games Player* praised the arcade original as
+["one of the best games to follow in the wake of Asteroids"](https://archive.org/stream/video-games-player-volume-2-number-1-august-september-1983/Video%20Games%20Player%20-%20Volume%202%20Number%201%20August%20September%201983_djvu.txt)
+in its August/September 1983 issue.
 
 Eliminator mixes precision flying with a mischievous streak. Take on the
 computer alone, duel a friend, or join a four-player battle. Use energy bolts
@@ -44,16 +55,26 @@ Zektor's discrete-audio implementation from its original schematics.
 | Subsystem | Original Hardware | FPGA Implementation |
 |---|---|---|
 | **Main CPU** | Z80 at 3.867120 MHz from the 15.46848 MHz master clock | Cycle-based Z80-compatible G80 machine core with Sega address-security support |
-| **Security** | Sega 315-0070 in two-player Eliminator, 315-0076 in four-player Eliminator and Tac/Scan, 315-0064 in Star Trek, and 315-0082 in Zektor | Game-selected address permutation matching each security device |
+| **Security** | Sega 315-0064 in Space Fury and Star Trek, 315-0070 in two-player Eliminator, 315-0076 in four-player Eliminator and Tac/Scan, and 315-0082 in Zektor | Game-selected address permutation matching each security device |
 | **Vector Generator** | Sega X-Y Timing board, vector RAM, sine/cosine PROM, DACs, and analog deflection | Native G80 vector sequencer with a doubled-density shadow DDA and high-resolution raster presentation |
 | **Color** | Six-bit `RRGGBB` resistor-DAC output, with two bits per electron gun and 64 possible colors | All six native color bits are retained through drawing, crossings, phosphor decay, and presentation |
-| **Audio** | Discrete sound board in Eliminator; Universal Sound Board in Star Trek and Tac/Scan; Star Trek and Zektor use 8035-controlled SP0250 speech, while Zektor adds a discrete sound board and AY-3-8912 | Universal Sound Board, speech, and discrete sound models plus Zektor AY audio, with calibrated filtering and mixing |
-| **Display** | Horizontal color X-Y monitor in Eliminator, Star Trek and Zektor; vertical color X-Y monitor in Tac/Scan | 1080p, 720p, 480p, 480i, and 240p output with rotation, bloom, halo, and phosphor behavior |
-| **Controls** | Left/Right buttons in Eliminator; rotary controls in Star Trek, Tac/Scan and Zektor; action buttons | Independent controls for up to four players; spinner, mouse, analog stick, or digital rotation with adjustable direction and sensitivity for games with rotary controls |
+| **Audio** | Discrete sound boards in Space Fury, Eliminator and Zektor; Universal Sound Board in Star Trek and Tac/Scan; Space Fury, Star Trek and Zektor use 8035-controlled SP0250 speech, while Zektor adds an AY-3-8912 | Universal Sound Board, speech, and discrete sound models plus Zektor AY audio, with calibrated filtering and mixing |
+| **Display** | Horizontal color X-Y monitor in Space Fury, Eliminator, Star Trek and Zektor; vertical color X-Y monitor in Tac/Scan | 1080p, 720p, 480p, 480i, and 240p output with rotation, bloom, halo, and phosphor behavior |
+| **Controls** | Left/Right buttons in Space Fury and Eliminator; rotary controls in Star Trek, Tac/Scan and Zektor; action buttons | Independent controls for up to four players; spinner, mouse, analog stick, or digital rotation with adjustable direction and sensitivity for games with rotary controls |
 
 ---
 
 ## Controls
+
+### Space Fury
+
+| Input | Function |
+|---|---|
+| **Left / Right** | Rotate your fighter |
+| **Fire (Button A)** | Fire |
+| **Thrust (Button B)** | Apply thrust |
+| **Start 1 / Start 2** | Start a one-player or alternating two-player game |
+| **Coin** | Insert a credit |
 
 ### Eliminator
 
@@ -108,8 +129,8 @@ menu.
 
 ### Input Controls Menu
 
-These options apply to Star Trek, Tac/Scan and Zektor. Eliminator uses each
-player's Left/Right buttons directly.
+These options apply to Star Trek, Tac/Scan and Zektor. Space Fury and
+Eliminator use each player's Left/Right buttons directly.
 
 | Option | Function |
 |---|---|
@@ -134,10 +155,14 @@ ROMs are not included.
 
 Copy the release RBF to `_Arcade/cores/` and these MRA files to `_Arcade/`:
 
+- `Space Fury (revision C).mra`
 - `Eliminator (2 Players, set 2).mra`
 - `Star Trek.mra`
 - `Tac-Scan.mra`
 - `Zektor (revision B).mra`
+
+Space Fury (revision C) is the main entry. For revision A, copy its MRA from
+`releases/_alternatives/_Space Fury/` to `_Arcade/_alternatives/_Space Fury/`.
 
 Eliminator (2 Players, set 2) is the main entry. For the other four versions,
 copy the MRAs from `releases/_alternatives/_Eliminator/` to
@@ -148,8 +173,9 @@ ROM image.
 
 ## High Scores
 
-The supplied MRAs support persistent high scores. Saved high scores are
-restored automatically after each game initializes.
+The supplied MRAs support persistent high scores for all five games, including
+both Space Fury revisions. Saved high scores are restored automatically after
+each game initializes.
 
 To save manually, open the OSD and select **Save Settings**. For automatic
 saving, set **Autosave Hiscores** to **On** and select **Save Settings**. This
@@ -275,6 +301,8 @@ The release supports these MAME ROM sets:
 
 | Game | MRA | ROM archives searched |
 |---|---|---|
+| **Space Fury (revision C)** (main) | `releases/Space Fury (revision C).mra` | `spacfury.zip` |
+| **Space Fury (revision A)** | `releases/_alternatives/_Space Fury/Space Fury (revision A).mra` | `spacfurya.zip`, `spacfury.zip` |
 | **Eliminator (2 Players, set 2)** (main) | `releases/Eliminator (2 Players, set 2).mra` | `elim2a.zip`, `elim2.zip` |
 | **Eliminator (2 Players, set 1)** | `releases/_alternatives/_Eliminator/Eliminator (2 Players, set 1).mra` | `elim2.zip` |
 | **Eliminator (2 Players, cocktail)** | `releases/_alternatives/_Eliminator/Eliminator (2 Players, cocktail).mra` | `elim2c.zip`, `elim2.zip` |
@@ -284,7 +312,8 @@ The release supports these MAME ROM sets:
 | **Tac/Scan** | `releases/Tac-Scan.mra` | `tacscan.zip` |
 | **Zektor** | `releases/Zektor (revision B).mra` | `zektor.zip` |
 
-Space Fury remains a development target and is not part of this release.
+Space Fury revision C is recommended. The occasional flicker in Space Fury's
+yellow text faithfully reproduces the original hardware.
 
 ## Compilation
 
@@ -294,13 +323,13 @@ Use Quartus Prime Lite 17.0.x. Open the project `Arcade-SegaG80V.qpf` and compil
 
 - **alanswx:** Original Sega G80V machine core, CPU and security integration,
   MRAs, and sound and speech foundation.
-- **Videodr0me:** High-resolution vector presentation, framebuffer and CRT
-  effects, expanded controls, schematic-derived Universal Sound Board
-  filtering, and the Zektor discrete-audio implementation.
+- **Videodr0me:** High-resolution vector renderer, framebuffer and CRT
+  effects, expanded controls, high-score saving, schematic-derived Universal
+  Sound Board filtering, discrete-audio refinements, and accuracy improvements.
 - **Aaron Giles and MAME contributors:** detailed G80 machine, vector, and
-  sound research and executable reference.
+  sound research.
 - **JimmyStones and Arnim Laeuger:** T48 8035-compatible sound CPU work.
-- **Jose Tejada:** `jt49` AY implementation retained in the source tree.
+- **Jose Tejada:** `jt49` AY sound core.
 - **GI SP0250 digital LPC sound synthesizer:** O. Galibert.
 - **Mark Jenison:** preserved Sega/Gremlin G80 hardware research.
 - **MiSTer platform:** Sorgelig and the MiSTer community.
