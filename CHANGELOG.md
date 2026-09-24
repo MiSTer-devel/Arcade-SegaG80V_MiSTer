@@ -2,6 +2,12 @@
 
 All notable user-facing changes to this project are documented here.
 
+## Update [20260924]
+
+- Promoted Space Fury to release, with revision C as the main entry and
+  revision A under alternatives. Both revisions include speech, discrete
+  sound effects, and persistent high-score saving.
+
 ## Update [20260908]
 
 - Promoted Eliminator to release, including both two-player sets, the
